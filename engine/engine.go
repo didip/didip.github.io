@@ -3,8 +3,10 @@ package engine
 import (
 	"fmt"
 	"github.com/didip/didip.github.io/libstring"
+	"github.com/russross/blackfriday"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -61,6 +63,28 @@ func (e *Engine) NewBlankPost(title string) error {
 			"markdown",
 			"posts",
 			postFilename), titleMd, 0644)
+
+	return err
+}
+
+func (e *Engine) GeneratePostHTML(inpath string) error {
+	inpath = libstring.ExpandTildeAndEnv(inpath)
+
+	filename := path.Base(inpath)
+	filename = strings.Replace(filename, ".md", ".html", -1)
+
+	markdownData, err := ioutil.ReadFile(inpath)
+	if err != nil {
+		return err
+	}
+
+	html := blackfriday.MarkdownCommon(markdownData)
+
+	err = ioutil.WriteFile(
+		filepath.Join(
+			libstring.ExpandTildeAndEnv(e.CurrentDir),
+			"posts",
+			filename), html, 0644)
 
 	return err
 }

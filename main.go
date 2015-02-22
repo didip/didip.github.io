@@ -11,10 +11,11 @@ func main() {
 	blog := engine.NewBlog("Didip's Tech Mind")
 
 	app := cli.NewApp()
-	app.Name = "didip-blog"
-	app.Usage = "It builds Didip's blog."
+	app.Name = "didip.github.io"
+	app.Usage = "builds Didip's blog."
 	app.Author = "Didip Kerabat"
 	app.Email = "didipk@gmail.com"
+	app.Version = "9001.0.0"
 
 	app.Commands = []cli.Command{
 		{
@@ -35,6 +36,9 @@ func main() {
 				if crud == "create" {
 					title := c.Args().Get(1)
 					blog.NewBlankPost(title)
+				} else if crud == "generate" {
+					path := c.Args().Get(1)
+					blog.GeneratePostHTML(path)
 				}
 			},
 		},
