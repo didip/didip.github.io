@@ -3,8 +3,10 @@ package main
 import (
 	"github.com/codegangsta/cli"
 	"github.com/didip/didip.github.io/engine"
+	"github.com/go-fsnotify/fsnotify"
 	"net/http"
 	"os"
+	"path"
 )
 
 func main() {
@@ -23,6 +25,11 @@ func main() {
 			ShortName: "serv",
 			Usage:     "Run HTTP server",
 			Action: func(c *cli.Context) {
+				// Watches markdown/posts/ directory and auto-generate HTML
+				go blog.WatchDir(path.Join(blog.CurrentDir, "markdown", "posts"), func(event fsnotify.Event) {
+					blog.GenerateAllPostsHTML()
+				})
+
 				http.Handle("/", http.FileServer(http.Dir(".")))
 				http.ListenAndServe(blog.ServerPort(), nil)
 			},
