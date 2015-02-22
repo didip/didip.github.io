@@ -36,9 +36,15 @@ func main() {
 				if crud == "create" {
 					title := c.Args().Get(1)
 					blog.NewBlankPost(title)
+
 				} else if crud == "generate" {
 					path := c.Args().Get(1)
-					blog.GeneratePostHTML(path)
+
+					if path == "" {
+						blog.GenerateAllPostsHTML()
+					} else {
+						blog.GeneratePostHTML(path)
+					}
 				}
 			},
 		},

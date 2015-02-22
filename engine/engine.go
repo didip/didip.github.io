@@ -88,3 +88,19 @@ func (e *Engine) GeneratePostHTML(inpath string) error {
 
 	return err
 }
+
+func (e *Engine) GenerateAllPostsHTML() error {
+	mdDir := filepath.Join(
+		libstring.ExpandTildeAndEnv(e.CurrentDir),
+		"markdown",
+		"posts")
+
+	manyFileInfo, err := ioutil.ReadDir(mdDir)
+
+	for _, fileinfo := range manyFileInfo {
+		println(fileinfo.Name())
+		e.GeneratePostHTML(filepath.Join(mdDir, fileinfo.Name()))
+	}
+
+	return err
+}
