@@ -1,18 +1,23 @@
 package main
 
 import (
-	"filepath"
 	"fmt"
 	"github.com/codegangsta/cli"
+	"github.com/didip/didip.github.io/libstring"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 )
 
+var nonWordMatcher = regexp.MustCompile(`\W`)
+
 type Blog struct {
-	Title string
+	Title      string
+	CurrentDir string
 }
 
 func (b *Blog) ServerPort() string {
@@ -23,24 +28,43 @@ func (b *Blog) ServerPort() string {
 	return port
 }
 
-func (b *Blog) CurrentDir() (string, error) {
-	return filepath.Abs(filepath.Dir(os.Args[0]))
+func (b *Blog) NewPostFilename(title string) string {
+	title = strings.ToLower(title)
+	title = strings.Replace(title, " ", "-", -1)
+
+	for _, blankable := range []string{",", ".", "'"} {
+		title = strings.Replace(title, blankable, "", -1)
+	}
+
+	title = fmt.Sprintf("%v-%v", time.Now().UnixNano(), title)
+
+	nonWordMatcher.ReplaceAllString(title, "")
+	title = title + ".md"
+
+	return title
 }
 
 func (b *Blog) NewBlankPost(title string) error {
-	dasherizedTitle := strings.ToLower(title)
-	dasherizedTitle = strings.Replace(title, " ", "-", -1)
+	postFilename := b.NewPostFilename(title)
 
 	titleMd := []byte(fmt.Sprintf("## %v\n", title))
-	err := ioutil.WriteFile(filepath.Join(), titleMd, 0644)
 
+	err := ioutil.WriteFile(
+		filepath.Join(
+			libstring.ExpandTildeAndEnv(b.CurrentDir),
+			"markdown",
+			"posts",
+			postFilename), titleMd, 0644)
+
+	return err
 }
 
 func main() {
 	blog := &Blog{}
 	blog.Title = "Didip's Tech Mind"
+	blog.CurrentDir = "$GOPATH/src/github.com/didip/didip.github.io"
 
-	app = cli.NewApp()
+	app := cli.NewApp()
 	app.Name = "didip-blog"
 	app.Usage = "It builds Didip's blog."
 	app.Author = "Didip Kerabat"
@@ -64,13 +88,11 @@ func main() {
 
 				if crud == "create" {
 					title := c.Args().Get(1)
-					dasherizedTitle := strings.ToLower(title)
-					dasherizedTitle = strings.Replace(title, " ", "-", -1)
-
-					os.Create(filepath.Join())
+					blog.NewBlankPost(title)
 				}
 			},
 		},
 	}
 
+	app.Run(os.Args)
 }
