@@ -142,7 +142,6 @@ func (e *Engine) MarkdownSummary(inpath string) (map[string]string, error) {
 		text = append(text, line)
 
 		if strings.TrimSpace(line) == "" {
-			println(line)
 			newParagraphCounter++
 		}
 		if newParagraphCounter > e.MaxSummaryParagraphs {
