@@ -2,11 +2,10 @@ package engine
 
 import (
 	"fmt"
+	"github.com/didip/didip.github.io/engine/templates"
 	"github.com/didip/didip.github.io/libstring"
-	"github.com/go-fsnotify/fsnotify"
 	"github.com/russross/blackfriday"
 	"io/ioutil"
-	"log"
 	"os"
 	"path"
 	"path/filepath"
@@ -84,11 +83,12 @@ func (e *Engine) GeneratePostHTML(inpath string) error {
 
 	html := blackfriday.MarkdownCommon(markdownData)
 
-	err = ioutil.WriteFile(
-		filepath.Join(
-			libstring.ExpandTildeAndEnv(e.CurrentDir),
-			"posts",
-			filename), html, 0644)
+	outpath := filepath.Join(
+		libstring.ExpandTildeAndEnv(e.CurrentDir),
+		"posts",
+		filename)
+
+	err = templates.Generate(e.Title, html, outpath)
 
 	return err
 }
@@ -132,11 +132,13 @@ func (e *Engine) MarkdownSummary(inpath string) (map[string]string, error) {
 	newParagraphCounter := 0
 
 	for i, line := range strings.Split(string(markdownData), "\n") {
+		// Grab the title from first line
 		if i == 0 {
 			data["Title"] = strings.Replace(line, "## ", "", 1)
 			continue
 		}
 
+		// Grab summary text
 		text = append(text, line)
 
 		if strings.TrimSpace(line) == "" {
@@ -217,44 +219,11 @@ func (e *Engine) GenerateIndexHTML() error {
 
 	html := blackfriday.MarkdownCommon(markdownData)
 
-	err = ioutil.WriteFile(
-		filepath.Join(
-			libstring.ExpandTildeAndEnv(e.CurrentDir),
-			filename), html, 0644)
+	outpath := filepath.Join(
+		libstring.ExpandTildeAndEnv(e.CurrentDir),
+		filename)
+
+	err = templates.Generate(e.Title, html, outpath)
 
 	return err
-}
-
-func (e *Engine) WatchDir(path string, callback func(fsnotify.Event)) error {
-	watcher, err := fsnotify.NewWatcher()
-	if err != nil {
-		return err
-	}
-	defer watcher.Close()
-
-	done := make(chan bool)
-	go func() {
-		for {
-			select {
-			case event := <-watcher.Events:
-				if event.Op&fsnotify.Write == fsnotify.Write {
-					println(event.Name)
-					callback(event)
-				}
-
-			case err := <-watcher.Errors:
-				if err != nil {
-					log.Println("Error: ", err)
-				}
-			}
-		}
-	}()
-
-	err = watcher.Add(libstring.ExpandTildeAndEnv(path))
-	if err != nil {
-		return err
-	}
-
-	<-done
-	return nil
 }
