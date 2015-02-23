@@ -1,20 +1,40 @@
+/* Palette: http://paletton.com/#uid=10y0u0k6ifD3wqo53kK7m91fx82 */
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 a {
     text-decoration: none;
-    color: rgb(61, 146, 201);
+    color: #403428;
 }
 a:hover,
 a:focus {
     text-decoration: underline;
 }
 
+h2, h3 {
+    color: #403428;
+}
+h1 > a {
+    color: #fff;
+}
+h2 {
+    font-size: 40px;
+}
 h3 {
     font-weight: 100;
+}
+
+p, pre {
+    line-height: 1.6;
+    margin: 1.4em 0;
 }
 
 /* LAYOUT CSS */
@@ -34,8 +54,8 @@ h3 {
 }
 
 .sidebar {
-    background: rgb(61, 79, 93);
-    color: #fff;
+    background: #483f37;
+    color: #d2c6bb;
 }
 
 .brand-title,
@@ -59,10 +79,10 @@ h3 {
     display: inline-block;
     *display: inline;
     zoom: 1;
+    margin-left: 5px;
 }
 .nav-item a {
     background: transparent;
-    border: 2px solid rgb(176, 202, 219);
     color: #fff;
     margin-top: 1em;
     letter-spacing: 0.05em;
@@ -71,7 +91,6 @@ h3 {
 }
 .nav-item a:hover,
 .nav-item a:focus {
-    border: 2px solid rgb(61, 146, 201);
     text-decoration: none;
 }
 
@@ -103,7 +122,6 @@ h3 {
     margin-left: 1em;
 }
 .post-description {
-    font-family: Georgia, "Cambria", serif;
     color: #444;
     line-height: 1.8em;
 }
