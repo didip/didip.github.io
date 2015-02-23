@@ -105,7 +105,7 @@ p, pre {
 }
 
 .content {
-    padding: 2em 1em 0;
+    padding: 0.5em 1em 0;
 }
 
 .post {
@@ -176,7 +176,7 @@ p, pre {
 
 @media (min-width: 48em) {
     .content {
-        padding: 2em 3em 0;
+        padding: 0.5em 3em 0;
         margin-left: 25%;
     }
 

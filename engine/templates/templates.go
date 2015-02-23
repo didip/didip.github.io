@@ -47,13 +47,11 @@ func Generate(title string, html []byte, outpath string) error {
     </div>
 
     <div class="content pure-u-1 pure-u-md-3-4">
-        <div>
-            <!-- A wrapper for all the blog posts -->
-            <div class="posts">
-                <section class="post">
-                    %v
-                </section>
-            </div>
+        <!-- A wrapper for all the blog posts -->
+        <div class="posts">
+            <section class="post">
+                %v
+            </section>
         </div>
     </div>
 </div>
