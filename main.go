@@ -27,7 +27,7 @@ func main() {
 			Action: func(c *cli.Context) {
 				// Watches markdown/posts/ directory and auto-generate HTML
 				go blog.WatchDir(path.Join(blog.CurrentDir, "markdown", "posts"), func(event fsnotify.Event) {
-					blog.GenerateAllPostsHTML()
+					blog.GenerateAllHTML()
 				})
 
 				http.Handle("/", http.FileServer(http.Dir(".")))
@@ -48,7 +48,7 @@ func main() {
 					path := c.Args().Get(1)
 
 					if path == "" {
-						blog.GenerateAllPostsHTML()
+						blog.GenerateAllHTML()
 					} else {
 						blog.GeneratePostHTML(path)
 					}
