@@ -30,19 +30,28 @@ func Generate(title string, html []byte, outpath string) error {
 
 <div id="layout" class="pure-g">
     <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="self">
+            <img src="https://pbs.twimg.com/profile_images/519365815116627968/4Ob_nn_o_400x400.jpeg" alt="Didip Kerabat">
+
+            <div class="self-info">
+                <h3 class="fullname">Didip Kerabat</h3>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="//twitter.com/didip"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="//github.com/didip"><i class="fa fa-github"></i> GitHub</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
         <div class="header">
             <h1 class="brand-title"><a href="/">%v</a></h1>
-
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="//twitter.com/didip"><i class="fa fa-twitter"></i> Twitter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="//github.com/didip"><i class="fa fa-github"></i> GitHub</a>
-                    </li>
-                </ul>
-            </nav>
+            <h2 class="brand-tagline">They go together</h2>
         </div>
     </div>
 

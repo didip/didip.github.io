@@ -8,6 +8,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    font-weight: 200;
 }
 
 a {
@@ -19,8 +20,9 @@ a:focus {
     text-decoration: underline;
 }
 
-h2, h3 {
+h1, h2, h3 {
     color: #403428;
+    font-weight: 200;
 }
 h1 > a {
     color: #fff;
@@ -58,26 +60,30 @@ p, pre {
     color: #d2c6bb;
 }
 
-.brand-title,
-.brand-tagline {
-    margin: 0;
+.self {
+    margin: 1em auto;
 }
-.brand-title {
-    text-transform: uppercase;
+.self > img, .self-info {
+    float: right;
 }
-.brand-tagline {
-    font-weight: 300;
-    color: rgb(176, 202, 219);
+.self > img {
+    width: 80px;
+    height: 80px;
 }
-
+.self-info {
+    margin-right: 1em;
+}
+.fullname {
+    color: #fff;
+    margin: 5px 0 1em;
+}
 .nav-list {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 .nav-item {
-    display: inline-block;
-    *display: inline;
+    display: block;
     zoom: 1;
     margin-left: 5px;
 }
@@ -92,6 +98,19 @@ p, pre {
 .nav-item a:hover,
 .nav-item a:focus {
     text-decoration: none;
+}
+
+.brand-title,
+.brand-tagline {
+    margin: 0;
+}
+.brand-title {
+    text-transform: uppercase;
+}
+.brand-tagline {
+    font-size: 24px;
+    font-weight: 200;
+    color: rgb(176, 202, 219);
 }
 
 .content-subhead {
@@ -184,10 +203,39 @@ p, pre {
         margin: 80% 2em 0;
         text-align: right;
     }
+    .self {
+        margin: 1em 2em 0;
+        text-align: right;
+    }
 
     .sidebar {
         position: fixed;
         top: 0;
         bottom: 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .self {
+        display: none;
+    }
+}
+
+@media (max-width: 1120px) {
+    .self > img {
+        display: none;
+    }
+    .self-info {
+        margin: 0;
+    }
+}
+
+@media (max-width: 1250px) {
+    .brand-title {
+        font-size: 24px;
+        font-weight: 200;
+    }
+    .brand-tagline {
+        font-size: 20px;
     }
 }

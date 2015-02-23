@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	blog := engine.NewBlog("Didip's Mind")
+	blog := engine.NewBlog("Systems & Go")
 
 	app := cli.NewApp()
 	app.Name = "didip.github.io"
