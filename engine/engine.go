@@ -169,7 +169,9 @@ func (e *Engine) GenerateIndexMarkdown() error {
 
 	content := make([]string, 0)
 
-	for _, fileinfo := range manyFileInfo {
+	for i := len(manyFileInfo) - 1; i >= 0; i-- {
+		fileinfo := manyFileInfo[i]
+
 		postLink := "/posts/" + fileinfo.Name()
 		postLink = strings.Replace(postLink, ".md", ".html", -1)
 
