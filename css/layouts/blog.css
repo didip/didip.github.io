@@ -190,7 +190,25 @@ p, pre {
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 400px) {
+    h2 {
+        font-size: 26px;
+    }
+    h3 {
+        font-size: 22px;
+    }
+    .self {
+        display: none;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 800px) {
+    h2 {
+        font-size: 30px;
+    }
+    h3 {
+        font-size: 26px;
+    }
     .self {
         display: none;
     }
