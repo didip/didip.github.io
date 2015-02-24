@@ -202,6 +202,12 @@ p, pre {
     }
 }
 
+@media (max-width: 766px) {
+    .self {
+        display: none;
+    }
+}
+
 @media (min-width: 401px) and (max-width: 800px) {
     h2 {
         font-size: 30px;
@@ -209,8 +215,14 @@ p, pre {
     h3 {
         font-size: 26px;
     }
-    .self {
-        display: none;
+}
+
+@media (min-width: 766px) and (max-width: 800px) {
+    .self-info .fullname {
+        margin-bottom: 0.5em;
+    }
+    .self-info .nav {
+        font-size: 16px;
     }
 }
 
