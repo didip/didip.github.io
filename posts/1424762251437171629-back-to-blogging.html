@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Systems & Go</title>
+
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <link rel="stylesheet" href="/css/layouts/blog.css">
+
+    <script src="/js/prism.js"></script>
+    <!--[if IE]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="self">
+            <img src="https://pbs.twimg.com/profile_images/519365815116627968/4Ob_nn_o_400x400.jpeg" alt="Didip Kerabat">
+
+            <div class="self-info">
+                <h3 class="fullname">Didip Kerabat</h3>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="//twitter.com/didip"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="//github.com/didip"><i class="fa fa-github"></i> GitHub</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="brand-title"><a href="/">Systems & Go</a></h1>
+            <h2 class="brand-tagline">They go together</h2>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <!-- A wrapper for all the blog posts -->
+        <div class="posts">
+            <section class="post">
+                <h2>Back to blogging again. This time in Go!</h2>
+
+<p>I&rsquo;ve always wanted to have more control over my own blog, reducing as much bells and wistles as possible, and focus on just the essence: The posts themselves.</p>
+
+<p>All my friends know that I&rsquo;ve been enamored with <a href="https://golang.org/">Go</a> nowadays. This blog engine (static-site generator) is another perfect excuse to write even more Go.</p>
+
+<p>For your reading pleasure, I&rsquo;ll share some of the blog&rsquo;s interesting parts you may find useful.</p>
+
+<h3>Standard library HTTP server</h3>
+
+<p>It is no secret that Go standard library, especially <code>net/http</code>, is amazing. but did you know that you can serve static files in just three lines of code?</p>
+
+<pre class="code"><code class="language-go">import "net/http"
+http.Handle("/", http.FileServer(http.Dir(".")))
+http.ListenAndServe(":3000", nil)
+</code></pre>
+
+<h3>Third party libraries</h3>
+
+<p>To start, I am using <a href="https://github.com/codegangsta/cli">github.com/codegangsta/cli</a> library to help me build command line application.
+It provides a few conveniences such as <code>--help</code> generation and options parsing.</p>
+
+<p>Next thing I need is Markdown parser. To parse and convert Markdown to HTML, I use <a href="https://github.com/russross/blackfriday">github.com/russross/blackfriday</a>.
+It sanitizes user-supplied data, fast, supports extensions, and utf-8 friendly.</p>
+
+<p>As part of the blog engine features, I want it to watch my markdown files and auto-generate HTML pages as I save the file.
+This is a great use case for <code>inotify</code> and Go has a library for it: <a href="github.com/go-fsnotify/fsnotify">github.com/go-fsnotify/fsnotify</a>.
+The library is easy to use and concise, the entire directory watcher code is only 40 lines long.</p>
+
+<pre class="code"><code class="language-go">package dirwatcher
+
+import (
+    "github.com/didip/didip.github.io/libstring"
+    "github.com/go-fsnotify/fsnotify"
+    "log"
+)
+
+func WatchDir(path string, callback func(fsnotify.Event)) error {
+    watcher, err := fsnotify.NewWatcher()
+    if err != nil { return err }
+    defer watcher.Close()
+
+    done := make(chan bool)
+    go func() {
+        for {
+            select {
+            case event := <-watcher.Events:
+                if event.Op&fsnotify.Write == fsnotify.Write {
+                    callback(event)
+                }
+            case err := <-watcher.Errors:
+                if err != nil { log.Println("Error: ", err) }
+            }
+        }
+    }()
+
+    err = watcher.Add(libstring.ExpandTildeAndEnv(path))
+    if err != nil { return err }
+
+    <-done
+    return nil
+}
+</code></pre>
+
+<h3>Summary</h3>
+
+<p>Overall, I had a great time building it. The entire process took about six hours and they are mostly CSS editing as I am not a front-end developer.</p>
+
+<p><a href="https://github.com/didip/didip.github.io">You can check out the whole code base here</a>.</p>
+
+<p>I had no idea that static-site generator can be this much fun, I am looking foward to writing more blog posts.</p>
+
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
