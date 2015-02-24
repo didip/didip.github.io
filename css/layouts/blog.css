@@ -23,6 +23,7 @@ a:focus {
 h1, h2, h3 {
     color: #403428;
     font-weight: 200;
+    margin-bottom: 0;
 }
 h1 > a {
     color: #fff;
@@ -31,12 +32,13 @@ h2 {
     font-size: 40px;
 }
 h3 {
+    font-size: 28px;
     font-weight: 100;
 }
 
 p, pre {
     line-height: 1.6;
-    margin: 1.4em 0;
+    margin: 1em 0 0;
 }
 
 /* LAYOUT CSS */
@@ -69,6 +71,9 @@ p, pre {
 .self > img {
     width: 80px;
     height: 80px;
+}
+.self h3 {
+    font-size: 20px;
 }
 .self-info {
     margin-right: 1em;
@@ -135,40 +140,10 @@ p, pre {
     color: #222;
     margin-bottom: 0.2em;
 }
-.post-avatar {
-    border-radius: 50px;
-    float: right;
-    margin-left: 1em;
-}
 .post-description {
     color: #444;
     line-height: 1.8em;
 }
-.post-meta {
-    color: #999;
-    font-size: 90%;
-    margin: 0;
-}
-
-.post-category {
-    margin: 0 0.1em;
-    padding: 0.3em 1em;
-    color: #fff;
-    background: #999;
-    font-size: 80%;
-}
-    .post-category-design {
-        background: #5aba59;
-    }
-    .post-category-pure {
-        background: #4d85d1;
-    }
-    .post-category-yui {
-        background: #8156a7;
-    }
-    .post-category-js {
-        background: #df2d4f;
-    }
 
 .post-images {
     margin: 1em 0;

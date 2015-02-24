@@ -19,8 +19,10 @@ func Generate(title string, html []byte, outpath string) error {
     <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
     <link rel="stylesheet" href="/css/layouts/blog.css">
 
+    <script src="/js/prism.js"></script>
     <!--[if IE]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
