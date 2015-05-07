@@ -20,6 +20,9 @@ a:focus {
     text-decoration: underline;
 }
 
+h1, h2, h3, h4, h5, h6, b {
+    color: #403428;
+}
 h1, h2, h3 {
     color: #403428;
     font-weight: 200;
@@ -37,7 +40,11 @@ h3 {
 }
 
 p, pre {
-    line-height: 1.6;
+    line-height: 1.5;
+    margin: 0.8em 0 0;
+}
+li p, li pre {
+    line-height: 1.25;
     margin: 1em 0 0;
 }
 
