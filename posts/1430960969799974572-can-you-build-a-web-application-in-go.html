@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Systems & Go</title>
+
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <link rel="stylesheet" href="/css/layouts/blog.css">
+
+    <script src="/js/prism.js"></script>
+    <!--[if IE]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="self">
+            <img src="https://pbs.twimg.com/profile_images/519365815116627968/4Ob_nn_o_400x400.jpeg" alt="Didip Kerabat">
+
+            <div class="self-info">
+                <h3 class="fullname">Didip Kerabat</h3>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="//twitter.com/didip"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="//github.com/didip"><i class="fa fa-github"></i> GitHub</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="brand-title"><a href="/">Systems & Go</a></h1>
+            <h2 class="brand-tagline">They go together</h2>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <!-- A wrapper for all the blog posts -->
+        <div class="posts">
+            <section class="post">
+                <h2>Can you build a web application in Go?</h2>
+
+<p>Surely the answer is yes. Any yet, a surprising number of people asked me this question. Something must have prevented them from writing web project in Go.</p>
+
+<p>So, I began the journey&hellip;</p>
+
+<h2>The Beginning</h2>
+
+<p>Superficially, Go culture is similar to Node and Python in the web world.</p>
+
+<p>Everyone is suggesting newcomers to start small, piece components one by one as you need them. Seems reasonable.</p>
+
+<p>So that begs the question, what are the minimum features you need to build a modern web application?</p>
+
+<p>Here&rsquo;s the non-exhaustive list:</p>
+
+<ul>
+<li><p>A database, usually RDBMS but not always.</p></li>
+
+<li><p>Database migration tool, some web frameworks provide it, some don&rsquo;t.</p></li>
+
+<li><p>Logging facility, all modern languages provide this.</p></li>
+
+<li><p>Testing tools, most modern languages provide this.</p></li>
+
+<li><p>HTTP router, usually comes by default if you use a web framework.</p></li>
+
+<li><p>HTTP middleware, some web frameworks provide this by default.</p></li>
+
+<li><p>Session, context, and cookie management, fairly standard stuff.</p></li>
+
+<li><p>Password hasher, you cannot have a web project without it.</p></li>
+
+<li><p>Healty amount of 3rd party libraries to build awesome things.</p></li>
+
+<li><p>A UI framework, most people settle with <a target="_blank" href="//getbootstrap.com/">Bootstrap</a> or <a target="_blank" href="//foundation.zurb.com/">Foundation</a>.</p></li>
+</ul>
+
+<p>That&rsquo;s&hellip; quite a lot of stuff and professional work usually comes with a deadline attached. I can see how this may presents a barrier to new users.</p>
+
+<h2>The Buildup</h2>
+
+<p>At this stage most newcomers would start googling &ldquo;Golang Web Framework&rdquo;. And boy, do they have a lot of choices:</p>
+
+<ul>
+<li><p><a target="_blank" href="//www.gorillatoolkit.org/">Gorilla Toolkit</a></p></li>
+
+<li><p><a target="_blank" href="//martini.codegangsta.io/">Martini</a> and it&rsquo;s sibling: <a target="_blank" href="//github.com/codegangsta/negroni">Negroni</a>.</p></li>
+
+<li><p><a target="_blank" href="//gin-gonic.github.io/gin/">Gin Gonic</a></p></li>
+
+<li><p><a target="_blank" href="//goji.io/">Goji</a></p></li>
+
+<li><p><a target="_blank" href="//github.com/gocraft/web/">gocraft/web</a></p></li>
+
+<li><p><a target="_blank" href="//beego.me/">Beego</a></p></li>
+
+<li><p><a target="_blank" href="//revel.github.io/">Revel</a></p></li>
+
+<li><p>Various small players like: <a target="_blank" href="//github.com/plimble/ace">Ace</a>, <a target="_blank" href="//github.com/nbio/hitch">Hitch</a>, <a target="_blank" href="//github.com/guregu/kami">Kami</a>, <a target="_blank" href="//github.com/rocwong/neko">Neko</a></p></li>
+</ul>
+
+<p>This reminded me of the bad old days of Python web frameworks before Django came along: Zope, Twisted, CherryPy, TurboGear, Spyce, Quixote, web.py, <a target="_blank" href="//wiki.python.org/moin/WebFrameworks">etc.</a></p>
+
+<p>By now, probably half of the newcomers who are interested bounced already and return to their comfort zone: Rails or Django.</p>
+
+<h2>The Problem</h2>
+
+<p>That said, the high number of web frameworks is not the biggest problem. Instead, it&rsquo;s the difficulty to bootstrap a new project within a deadline.</p>
+
+<p><b>From 0-60, how fast can I get a new project up and running while still following the community&rsquo;s general advice; by starting small.</b></p>
+
+<p>If a newcomer decides to use one of the larger frameworks, the community will tell them to use smaller ones or even just net/http.</p>
+
+<p>But realistically, a big web project needs a structure. A common set of tools or conventions for engineers to maximize their agility at work.</p>
+
+<h2>The Solution</h2>
+
+<p>So what if, you can have a cake and eat it too? What if, you can have all the things you need for a modern web application without being forced to adhere to a big framework.</p>
+
+<p>A project generator can do that for you. It removes the <a target="_blank" href="//en.wikipedia.org/wiki/Analysis_paralysis">analysis-paralysis</a> situation during the research phase and provides users with the ultimate freedom to use or remove some of the components.</p>
+
+<p>To test this idea, I created <a target="_blank" href="//go-bootstrap.io/">go-bootstrap</a>.</p>
+
+<p>It puts together common tools (following the requirements described above) and bootstrap a new project to the point where user can signup and login.</p>
+
+<p>Once a project is generated, users have 100% control over the web stack. There&rsquo;s no need to worry about upgrade headache from version 2.0 to 3.0.</p>
+
+<p>So give it a try: <a target="_blank" href="//go-bootstrap.io/" style="font-size: 20px; font-weight: bold">go-bootstrap.io</a>. See if you like it and hopefully you&rsquo;ll convert to <a target="_blank" href="//play.golang.org/">Go</a>, just like me.</p>
+
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

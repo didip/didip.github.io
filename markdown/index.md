@@ -1,3 +1,12 @@
+[<h2>Can you build a web application in Go?</h2>](/posts/1430960969799974572-can-you-build-a-web-application-in-go.html)
+
+
+Surely the answer is yes. Any yet, a surprising number of people asked me this question. Something must have prevented them from writing web project in Go.
+
+So, I began the journey...
+
+
+
 [<h2>Back to blogging again. This time in Go!</h2>](/posts/1424762251437171629-back-to-blogging.html)
 
 
