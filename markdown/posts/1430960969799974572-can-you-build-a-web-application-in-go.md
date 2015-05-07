@@ -9,7 +9,7 @@ So, I began the journey...
 
 Superficially, Go culture is similar to Node and Python in the web world.
 
-Everyone is suggesting newcomers to start small, piece components one by one as you need them. Seems reasonable.
+Everyone is suggesting newcomers to start small, gather the components one by one as you need them. Seems reasonable.
 
 So that begs the question, what are the minimum features you need to build a modern web application?
 
