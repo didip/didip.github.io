@@ -44,7 +44,7 @@ At this stage most newcomers would start googling "Golang Web Framework". And bo
 
 * <a target="_blank" href="//www.gorillatoolkit.org/">Gorilla Toolkit</a>
 
-* <a target="_blank" href="//martini.codegangsta.io/">Martini</a> and it's sibling: <a target="_blank" href="//github.com/codegangsta/negroni">Negroni</a>.
+* <a target="_blank" href="//martini.codegangsta.io/">Martini</a> and its sibling: <a target="_blank" href="//github.com/codegangsta/negroni">Negroni</a>.
 
 * <a target="_blank" href="//gin-gonic.github.io/gin/">Gin Gonic</a>
 
