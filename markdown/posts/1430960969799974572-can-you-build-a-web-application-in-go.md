@@ -31,7 +31,7 @@ Here's the non-exhaustive list:
 
 * Password hasher, you cannot have a web project without it.
 
-* Healty amount of 3rd party libraries to build awesome things.
+* Healthy amount of 3rd party libraries to build awesome things.
 
 * A UI framework, most people settle with <a target="_blank" href="//getbootstrap.com/">Bootstrap</a> or <a target="_blank" href="//foundation.zurb.com/">Foundation</a>.
 
