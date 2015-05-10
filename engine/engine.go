@@ -73,6 +73,9 @@ func (e *Engine) NewBlankPost(title string) error {
 func (e *Engine) GeneratePostHTML(inpath string) error {
 	inpath = libstring.ExpandTildeAndEnv(inpath)
 
+	markdownLines := libstring.ReadLines(inpath)
+	postTitle := strings.Replace(markdownLines[0], "## ", "", -1)
+
 	filename := path.Base(inpath)
 	filename = strings.Replace(filename, ".md", ".html", -1)
 
@@ -88,7 +91,7 @@ func (e *Engine) GeneratePostHTML(inpath string) error {
 		"posts",
 		filename)
 
-	err = templates.Generate(e.Title, html, outpath)
+	err = templates.Generate(e.Title, postTitle, html, outpath)
 
 	return err
 }
@@ -224,7 +227,7 @@ func (e *Engine) GenerateIndexHTML() error {
 		libstring.ExpandTildeAndEnv(e.CurrentDir),
 		filename)
 
-	err = templates.Generate(e.Title, html, outpath)
+	err = templates.Generate(e.Title, "All Posts", html, outpath)
 
 	return err
 }

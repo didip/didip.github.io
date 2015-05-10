@@ -1,6 +1,7 @@
 package libstring
 
 import (
+	"bufio"
 	"crypto/rand"
 	"encoding/base64"
 	"os"
@@ -41,4 +42,20 @@ func GeneratePassword(size int) (string, error) {
 	}
 
 	return base64.URLEncoding.EncodeToString(rb), nil
+}
+
+func ReadLines(path string) []string {
+	inFile, _ := os.Open(path)
+	defer inFile.Close()
+
+	scanner := bufio.NewScanner(inFile)
+	scanner.Split(bufio.ScanLines)
+
+	lines := make([]string, 0)
+
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+
+	return lines
 }

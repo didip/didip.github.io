@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 )
 
-func Generate(title string, html []byte, outpath string) error {
+func Generate(blogTitle string, postTitle string, html []byte, outpath string) error {
 	generated := fmt.Sprintf(`
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@ func Generate(title string, html []byte, outpath string) error {
     <meta charset=utf-8 />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>%v</title>
+    <title>%v - %v</title>
 
     <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
@@ -67,7 +67,7 @@ func Generate(title string, html []byte, outpath string) error {
     </div>
 </div>
 </body>
-</html>`, title, title, string(html))
+</html>`, blogTitle, postTitle, blogTitle, string(html))
 
 	return ioutil.WriteFile(outpath, []byte(generated), 0644)
 }
