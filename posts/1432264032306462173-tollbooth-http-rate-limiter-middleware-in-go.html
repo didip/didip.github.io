@@ -76,9 +76,11 @@
 <ul>
 <li><p>Limiting <code>POST</code> on <code>/login</code> and <code>/signup</code> helps to reduce spammer creating too many accounts.</p></li>
 
+<li><p>Limiting <code>POST</code> on <code>/upload</code> endpoint allows you to control how much memory your application is spending on buffering+streaming blobs.</p></li>
+
 <li><p>Limiting <code>GET</code> on some of your public API endpoints protects you from your customers accessing too much data in super short period of time.</p></li>
 
-<li><p>Public API endpoints need DDoS protection anyway.</p></li>
+<li><p>Public API endpoints need DDoS protection anyway. This middleware won&rsquo;t help you if your link is saturated through other means of attack.</p></li>
 
 <li><p>As mentioned above, limiting your private API endpoints protects you from your own services DoS attack. This accidental DoS can even come from your own Javascript.</p></li>
 

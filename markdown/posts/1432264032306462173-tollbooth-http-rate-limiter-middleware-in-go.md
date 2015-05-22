@@ -21,9 +21,11 @@ Allow me to give you a few more real life use cases:
 
 * Limiting `POST` on `/login` and `/signup` helps to reduce spammer creating too many accounts.
 
+* Limiting `POST` on `/upload` endpoint allows you to control how much memory your application is spending on buffering+streaming blobs.
+
 * Limiting `GET` on some of your public API endpoints protects you from your customers accessing too much data in super short period of time.
 
-* Public API endpoints need DDoS protection anyway.
+* Public API endpoints need DDoS protection anyway. This middleware won't help you if your link is saturated through other means of attack.
 
 * As mentioned above, limiting your private API endpoints protects you from your own services DoS attack. This accidental DoS can even come from your own Javascript.
 
