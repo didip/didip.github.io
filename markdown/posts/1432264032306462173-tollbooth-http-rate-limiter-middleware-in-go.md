@@ -37,7 +37,8 @@ func HelloHandler(w http.ResponseWriter, req *http.Request) {
 func main() {
     // You can create a generic limiter for all your handlers
     // or one for each handler. Your choice.
-    limiter := tollbooth.LimitFuncHandler(tollbooth.NewLimiter(1, time.Second)
+    // This limiter basically says: allow at most 1 request per 1 second.
+    limiter := tollbooth.NewLimiter(1, time.Second)
 
     // This is an example on how to limit only GET and POST requests.
     limiter.Methods = []string{"GET", "POST"}
