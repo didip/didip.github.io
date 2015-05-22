@@ -1,3 +1,13 @@
+[<h2>Tollbooth: An HTTP rate limiter middleware in Go</h2>](/posts/1432264032306462173-tollbooth-http-rate-limiter-middleware-in-go.html)
+
+
+Another great week leads to another OSS project. I am pleased to announce [Tollbooth: #golang HTTP rate limiter middleware](https://github.com/didip/tollbooth).
+
+It allows you to limit access to each one of your request handlers.
+
+For example, you may want to allow unlimited access to `/` but limit access to `POST /login` for as much as 10 requests per second per remote IP.
+
+
 [<h2>Can you build a web application in Go?</h2>](/posts/1430960969799974572-can-you-build-a-web-application-in-go.html)
 
 

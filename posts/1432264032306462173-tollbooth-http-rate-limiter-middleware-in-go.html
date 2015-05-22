@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Systems & Go - Tollbooth: An HTTP rate limiter middleware in Go</title>
+
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <link rel="stylesheet" href="/css/layouts/blog.css">
+
+    <script src="/js/prism.js"></script>
+    <!--[if IE]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="self">
+            <img src="https://pbs.twimg.com/profile_images/519365815116627968/4Ob_nn_o_400x400.jpeg" alt="Didip Kerabat">
+
+            <div class="self-info">
+                <h3 class="fullname">Didip Kerabat</h3>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="//twitter.com/didip"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="//github.com/didip"><i class="fa fa-github"></i> GitHub</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="brand-title"><a href="/">Systems & Go</a></h1>
+            <h2 class="brand-tagline">They go together</h2>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <!-- A wrapper for all the blog posts -->
+        <div class="posts">
+            <section class="post">
+                <h2>Tollbooth: An HTTP rate limiter middleware in Go</h2>
+
+<p>Another great week leads to another OSS project. I am pleased to announce <a href="https://github.com/didip/tollbooth">Tollbooth: #golang HTTP rate limiter middleware</a>.</p>
+
+<p>It allows you to limit access to each one of your request handlers.</p>
+
+<p>For example, you may want to allow unlimited access to <code>/</code> but limit access to <code>POST /login</code> for as much as 10 requests per second per remote IP.</p>
+
+<h2>Why do I need one?</h2>
+
+<p>I don&rsquo;t think it&rsquo;s controversial to say that every web application/service needs one.</p>
+
+<p>It&rsquo;s pretty obvious that the internet is a hostile environment full of potential abusers ready to attack your site.</p>
+
+<p>What&rsquo;s not obvious is that the cloud is also hostile to your environment especially if you are using Service Oriented Architecture. Without throttling, a brief spike in network latency can cause one of your service to innocently attack your other services, causing a domino effect.</p>
+
+<p>HTTP rate limiter can act as first line of defense in keeping your services in line.</p>
+
+<h2>Sounds good, how can I use it on my Go application?</h2>
+
+<p>Great question! Here&rsquo;s the five minutes tutorial:</p>
+
+<pre class="code"><code class="language-go">package main
+
+import (
+    "github.com/didip/tollbooth"
+    "net/http"
+    "time"
+)
+
+func HelloHandler(w http.ResponseWriter, req *http.Request) {
+    w.Write([]byte("Hello, World!"))
+}
+
+func main() {
+    // You can create a generic limiter for all your handlers
+    // or one for each handler. Your choice.
+    limiter := tollbooth.LimitFuncHandler(tollbooth.NewLimiter(1, time.Second)
+
+    // This is an example on how to limit only GET and POST requests.
+    limiter.Methods = []string{"GET", "POST"}
+
+    // You can also limit by specific request headers, containing certain values.
+    // Typically, you prefetched these values from the database.
+    limiter.Headers = make(map[string][]string)
+    limiter.Headers["X-Access-Token"] = []string{"abc123", "xyz098"}
+
+    // And finally, you can limit access based on basic auth usernames.
+    // Typically, you prefetched these values from the database as well.
+    limiter.BasicAuthUsers = []string{"bob", "joe", "didip"}
+
+    // Example on how to wrap your request handler.
+    http.Handle("/", tollbooth.LimitFuncHandler(limiter, HelloHandler))
+    http.ListenAndServe(":12345", nil)
+}
+</code></pre>
+
+<h2>Looks too easy to be true, what&rsquo;s the catch?</h2>
+
+<p>Some of you sceptics might think: Surely I need to store some metadata on the database to make this work. If I need a database, I&rsquo;m introducing another point of failure, right?</p>
+
+<p>Good thinking, but no. You do not need a database to use this middleware thanks to this little algorithm called <a href="http://en.wikipedia.org/wiki/Token_bucket">Token Bucket. Click on this link to read more on Wikipedia.</a>.</p>
+
+<p>So give it a try: <a target="_blank" href="//github.com/didip/tollbooth" style="font-size: 20px; font-weight: bold">github.com/didip/tollbooth</a>. See if you like it.</p>
+
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
