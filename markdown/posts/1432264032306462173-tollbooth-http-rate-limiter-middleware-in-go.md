@@ -29,7 +29,7 @@ Allow me to give you a few more real life use cases:
 
 * As mentioned above, limiting your private API endpoints protects you from your own services DoS attack. This accidental DoS can even come from your own Javascript.
 
-* Limiting private API endpoints is usually an easy way to receive cookies and pies from DB team.
+* Limiting API endpoints is usually an easy way to receive cookies and pies from DB team.
 
 
 ## Sounds good, how can I use it on my Go application?
