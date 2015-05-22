@@ -9,13 +9,25 @@ For example, you may want to allow unlimited access to `/` but limit access to `
 
 ## Why do I need one?
 
-I don't think it's controversial to say that every web application/service needs one.
+I don't think it's controversial to say that every web application/service needs a rate limiter.
 
-It's pretty obvious that the internet is a hostile environment full of potential abusers ready to attack your site.
+The fact that the internet is a hostile environment full of potential abusers ready to attack your site is pretty obvious.
 
 What's not obvious is that the cloud is also hostile to your environment especially if you are using Service Oriented Architecture. Without throttling, a brief spike in network latency can cause one of your service to innocently attack your other services, causing a domino effect.
 
 HTTP rate limiter can act as first line of defense in keeping your services in line.
+
+Allow me to give you a few more real life use cases:
+
+* Limiting `POST` on `/login` and `/signup` helps to reduce spammer creating too many accounts.
+
+* Limiting `GET` on some of your public API endpoints protects you from your customers accessing too much data in super short period of time.
+
+* Public API endpoints need DDoS protection anyway.
+
+* As mentioned above, limiting your private API endpoints protects you from your own services DoS attack. This accidental DoS can even come from your own Javascript.
+
+* Limiting private API endpoints is usually an easy way to receive cookies and pies from DB team.
 
 
 ## Sounds good, how can I use it on my Go application?
