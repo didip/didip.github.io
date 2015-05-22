@@ -19,7 +19,7 @@ HTTP rate limiter can act as first line of defense in keeping your services in l
 
 Allow me to give you a few more real life use cases:
 
-* Limiting `POST` on `/login` and `/signup` helps to reduce spammer creating too many accounts.
+* Limiting `POST` on `/login` and `/signup` helps to reduce spammer from creating too many accounts.
 
 * Limiting `POST` on `/upload` endpoint allows you to control how much memory your application is spending on buffering+streaming blobs.
 
