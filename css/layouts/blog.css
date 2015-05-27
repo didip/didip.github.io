@@ -269,6 +269,9 @@ li p, li pre {
 }
 
 @media (max-width: 767px) {
+    menu, ol, ul {
+        padding: 0 0 0 14px;
+    }
     .brand-title {
         font-size: 36px;
         font-weight: 200;
