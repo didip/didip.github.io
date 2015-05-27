@@ -61,7 +61,7 @@ li p, li pre {
 .header {
     text-align: center;
     top: auto;
-    margin: 3em auto;
+    margin: 2.5em auto;
 }
 
 .sidebar {
@@ -84,6 +84,12 @@ li p, li pre {
 }
 .self-info {
     margin-right: 1em;
+}
+.self-mobile {
+    display: none;
+    margin: 10px 0 0;
+    color: #fff;
+    font-size: 16px;
 }
 .fullname {
     color: #fff;
@@ -118,6 +124,7 @@ li p, li pre {
 }
 .brand-title {
     text-transform: uppercase;
+    margin-bottom: 4px;
 }
 .brand-tagline {
     font-size: 24px;
@@ -197,39 +204,13 @@ li p, li pre {
     }
 }
 
-@media (max-width: 400px) {
-    h2 {
-        font-size: 26px;
+@media (max-width: 1250px) {
+    .brand-title {
+        font-size: 24px;
+        font-weight: 200;
     }
-    h3 {
-        font-size: 22px;
-    }
-    .self {
-        display: none;
-    }
-}
-
-@media (max-width: 766px) {
-    .self {
-        display: none;
-    }
-}
-
-@media (min-width: 401px) and (max-width: 800px) {
-    h2 {
-        font-size: 30px;
-    }
-    h3 {
-        font-size: 26px;
-    }
-}
-
-@media (min-width: 766px) and (max-width: 800px) {
-    .self-info .fullname {
-        margin-bottom: 0.5em;
-    }
-    .self-info .nav {
-        font-size: 16px;
+    .brand-tagline {
+        font-size: 20px;
     }
 }
 
@@ -242,12 +223,84 @@ li p, li pre {
     }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 959px) {
     .brand-title {
-        font-size: 24px;
+        font-size: 22px;
+    }
+    .brand-tagline {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 899px) {
+    .brand-title {
+        font-size: 20px;
+    }
+    .brand-tagline {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 847px) {
+    .brand-title {
+        font-size: 18px;
+    }
+    .brand-tagline {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 790px) {
+    .brand-title {
+        font-size: 17px;
+    }
+    .brand-tagline {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 800px) {
+    .self-info .fullname {
+        margin-bottom: 0.5em;
+    }
+    .self-info .nav {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .brand-title {
+        font-size: 36px;
         font-weight: 200;
     }
     .brand-tagline {
-        font-size: 20px;
+        font-size: 22px;
+    }
+    .self {
+        display: none;
+    }
+    .self-mobile {
+        display: block;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 800px) {
+    h2 {
+        font-size: 30px;
+    }
+    h3 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 400px) {
+    h2 {
+        font-size: 26px;
+    }
+    h3 {
+        font-size: 22px;
+    }
+    .self {
+        display: none;
     }
 }
