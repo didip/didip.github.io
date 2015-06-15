@@ -1,13 +1,14 @@
 package main
 
 import (
+	"net/http"
+	"os"
+	"path"
+
 	"github.com/codegangsta/cli"
 	"github.com/didip/didip.github.io/engine"
 	"github.com/didip/didip.github.io/engine/dirwatcher"
 	"github.com/go-fsnotify/fsnotify"
-	"net/http"
-	"os"
-	"path"
 )
 
 func main() {
@@ -41,7 +42,7 @@ func main() {
 			Action: func(c *cli.Context) {
 				crud := c.Args().First()
 
-				if crud == "create" {
+				if crud == "create" || crud == "new" {
 					title := c.Args().Get(1)
 					blog.NewBlankPost(title)
 
