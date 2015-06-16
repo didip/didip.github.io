@@ -65,7 +65,9 @@ What if your startup can do away with all that and increase the velocity even hi
 
 ### 4. Production ready
 
-In most cases, Go performance is on par with Java and it consumes an order of magnitude less memory.
+* In most cases, Go performance is on par with Java and it consumes an order of magnitude less memory.
+
+* Go forcing you to handle error immediately is great! Surprising exceptions, that only happen in production, is a thing of the past.
 
 
 ## The blub paradox
