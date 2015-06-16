@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Systems & Go - Why Go is beating the averages</title>
+
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <link rel="stylesheet" href="/css/layouts/blog.css">
+
+    <script src="/js/prism.js"></script>
+    <!--[if IE]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="self">
+            <img src="https://pbs.twimg.com/profile_images/519365815116627968/4Ob_nn_o_400x400.jpeg" alt="Didip Kerabat">
+
+            <div class="self-info">
+                <h3 class="fullname">Didip Kerabat</h3>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="//twitter.com/didip"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="//github.com/didip"><i class="fa fa-github"></i> GitHub</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="brand-title"><a href="/">Systems & Go</a></h1>
+            <h2 class="brand-tagline">They go together</h2>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <!-- A wrapper for all the blog posts -->
+        <div class="posts">
+            <section class="post">
+                <h2>Why Go is beating the averages</h2>
+
+<p>In April 2001, rev. April 2003, Paul Graham wrote an article called <a href="http://www.paulgraham.com/avg.html" target="_blank">&ldquo;Beating the Averages&rdquo;</a></p>
+
+<p>This blog post is about how Go, following the rationale of that article, is the secret weapon that all startups should have.</p>
+
+<h2>The secret weapon</h2>
+
+<blockquote>
+Software is a very competitive business, prone to natural monopolies. A company that gets software written faster and better will, all other things being equal, put its competitors out of business... In a startup, if you bet on the wrong technology, your competitors will crush you.
+</blockquote>
+
+<p>That quoted paragraph describes how having a high velocity is very important for a startup to succeed. Makes sense, since every startup always have limited amount of time and money. Achieving high velocity, is precisely where Go shines.</p>
+
+<p>Go is not a language full of features. It does not have Generics (That said, you can use code generation to build custom data structures), its inheritance is not like what people are used to, it only have partial tail-call optimizations, etc. But that&rsquo;s what makes Go great! <b>Small language specs and great tooling</b>, allow you to get things done at a very high velocity and the resulting code is usually:</p>
+
+<h3>1. Easy to write</h3>
+
+<ul>
+<li><p>Go standard library is rich, easy to read, high quality, and performant. You&rsquo;ll be surprised how far you can get without using 3rd party libraries. As a side note, did you know that <code>database/sql</code> gives you connection pooling for free?</p></li>
+
+<li><p><code>go get</code> is not perfect, but it allows you to pull down third party libraries without any setup at all and this is hugely important during development phase.</p></li>
+
+<li><p>The type system hits the sweet spot for me, it eliminates a whole class of problems with minimal ceremony.</p></li>
+</ul>
+
+<h3>2. Easy to read</h3>
+
+<p>Thanks to <code>go fmt</code>, most Go codes look the same. This is an important trait as your engineering department grows, newcomers can get up to speed quickly.</p>
+
+<p>And if the newcomers don&rsquo;t know Go? No big deal. Thanks to the minimal specs, good engineers can pick up Go in 1-3 weekends and have a good grasps on all the features.</p>
+
+<h3>3. Easy to deploy</h3>
+
+<p>Nowadays, a lot of startups use Rails or Django to get that rapid prototyping velocity. Seems sensible, but once you need to deploy to production environment, now what? These are what people typically do:</p>
+
+<ul>
+<li><p>Spins up five to ten medium EC2 instances right of the bat.</p></li>
+
+<li><p>Write complicated deploy pipeline in <code>cap</code> or <code>fab</code>.</p></li>
+
+<li><p>Setup Nginx/HAProxy in front of the app because Unicorn or Gunicorn cannot handle direct internet traffic.</p></li>
+
+<li><p>What about websocket? Oh, that&rsquo;s a separate Node app, with equally complicated deploy pipeline.</p></li>
+
+<li><p>What about background workers? Same problem, another separate app with its own deploy pipeline.</p></li>
+</ul>
+
+<p>What if your startup can do away with all that and increase the velocity even higher:</p>
+
+<ul>
+<li><p>High performance and small memory footprint app means less money spent on computing resources, which in turns mean longer runway.</p></li>
+
+<li><p>Thanks to single binary artifact, you rarely have to think about differing dependencies between development and production environments.</p></li>
+
+<li><p>Single binary artifact makes your deployment pipeline a lot shorter. At bare minimum you only need three commands: rsync, symlink, and run. If you versioned your binary, rollback is as simple as flipping symlinks.</p></li>
+
+<li><p>Single binary artifact also makes your Vagrant setup a lot simpler and this allows you to do more cross OS testings.</p></li>
+
+<li><p>You don&rsquo;t need Nginx/HAProxy as connection buffer. Built-in <code>net/http</code> server handles high traffic just fine.</p></li>
+
+<li><p>Websocket? Thanks to Go evented design, you can run regular HTTP handlers and Websocket handlers in the same app. Just install <code>github.com/gorilla/websocket</code>.</p></li>
+
+<li><p>Background workers? For a lot of cases, just create goroutines and queue internally using channels.</p></li>
+</ul>
+
+<h3>4. Production ready</h3>
+
+<p>In most cases, Go performance is on par with Java and it consumes an order of magnitude less memory.</p>
+
+<h2>The blub paradox</h2>
+
+<p>The entire section, Lisp vs Blubs, got me thinking about the Go community. There is no shortage of these hypothetical Blub programmers looking down at Go because it does not have X features, am I right?</p>
+
+<p>Should Go community care about them? I don&rsquo;t think so.</p>
+
+<p>Go is quickly shaping the startup community. Here&rsquo;s the non exhaustive, and ever growing, list of companies that use Go: Bit.ly, Baidu, CloudFlare, DigitalOcean, Disqus, Dropbox, GitHub, Heroku, New York Times, Parse, Square, Twitch, Tumblr, Twitter, etc.</p>
+
+<p>Soon enough, some of the nay-sayers will convert to Go anyway because they are following the job market.</p>
+
+<h2>Back to the original point</h2>
+
+<p>Given all the arguments above, startup founders, y&rsquo;all should really consider Go seriously.</p>
+
+<p>There&rsquo;s so much to win and zero to lose. Why wait? Switch to <a style="font-size: 17px; font-weight: bold" href="//play.golang.org/" target="_blank">#golang</a> and reap all the benefits now.</p>
+
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

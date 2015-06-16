@@ -1,3 +1,12 @@
+[<h2>Why Go is beating the averages</h2>](/posts/1434380433653410969-why-go-is-beating-the-averages.html)
+
+
+In April 2001, rev. April 2003, Paul Graham wrote an article called <a href="http://www.paulgraham.com/avg.html" target="_blank">"Beating the Averages"</a>
+
+This blog post is about how Go, following the rationale of that article, is the secret weapon that all startups should have.
+
+
+
 [<h2>Tollbooth: An HTTP rate limiter middleware in Go</h2>](/posts/1432264032306462173-tollbooth-http-rate-limiter-middleware-in-go.html)
 
 
