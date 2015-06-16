@@ -70,7 +70,9 @@ In most cases, Go performance is on par with Java and it consumes an order of ma
 
 ## The blub paradox
 
-The entire section, Lisp vs Blubs, got me thinking about the Go community. There is no shortage of these hypothetical Blub programmers looking down at Go because it does not have X features, am I right?
+The entire section, Lisp vs Blubs, got me thinking about the Go community.
+
+There is no shortage of these hypothetical Blub programmers looking down at Go because it does not have X features.
 
 Should Go community care about them? I don't think so.
 
@@ -83,4 +85,4 @@ Soon enough, some of the nay-sayers will convert to Go anyway because they are f
 
 Given all the arguments above, startup founders, y'all should really consider Go seriously.
 
-There's so much to win and zero to lose. Why wait? Switch to <a style="font-size: 17px; font-weight: bold" href="//play.golang.org/" target="_blank">#golang</a> and reap all the benefits now.
+There's so much to win and zero to lose. Why wait? Call <a style="font-size: 17px; font-weight: bold" href="//play.golang.org/" target="_blank">1-800-SWITCH-GO</a> and reap all the benefits now.
