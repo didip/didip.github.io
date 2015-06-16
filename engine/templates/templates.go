@@ -54,6 +54,7 @@ func Generate(blogTitle string, postTitle string, html []byte, outpath string) e
         <div class="header">
             <h1 class="brand-title"><a href="/">%v</a></h1>
             <h2 class="brand-tagline">They go together</h2>
+            <h3 class="self-mobile">Didip Kerabat</h3>
         </div>
     </div>
 
