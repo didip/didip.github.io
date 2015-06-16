@@ -76,7 +76,7 @@ There is no shortage of these hypothetical Blub programmers looking down at Go b
 
 Should Go community care about them? I don't think so.
 
-Go is quickly shaping the startup community. Here's the non exhaustive, and ever growing, list of companies that use Go: Bit.ly, Baidu, CloudFlare, DigitalOcean, Disqus, Dropbox, GitHub, Heroku, New York Times, Parse, Square, Twitch, Tumblr, Twitter, etc.
+Go is quickly shaping the startup community. Here's the non exhaustive, and ever growing, list of companies that use Go: Bit.ly, Baidu, CloudFlare, CoreOS, DigitalOcean, Disqus, Docker, Dropbox, GitHub, Heroku, New York Times, Parse, Square, Twitch, Tumblr, Twitter, etc.
 
 Soon enough, some of the nay-sayers will convert to Go anyway because they are following the job market.
 
