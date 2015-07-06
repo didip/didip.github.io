@@ -5,7 +5,7 @@
     <meta charset=utf-8 />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Systems & Go - All Posts</title>
+    <title>Systems & Go - mcrouter-hub: An HTTP companion to Facebook's mcrouter</title>
 
     <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
@@ -54,7 +54,7 @@
         <!-- A wrapper for all the blog posts -->
         <div class="posts">
             <section class="post">
-                <p><a href="/posts/1436200384288949394-mcrouter-hub-an-http-companion-to-facebook-mcrouter.html"><h2>mcrouter-hub: An HTTP companion to Facebook&rsquo;s mcrouter</h2></a></p>
+                <h2>mcrouter-hub: An HTTP companion to Facebook&rsquo;s mcrouter</h2>
 
 <p>Gophercon 2015 is right around the corner and that sets up the mood for another open source project.</p>
 
@@ -62,33 +62,67 @@
 
 <p>It has a dozen or so, read and write strategies for customized scaling experience: Replication, hot-cold warmup, shard by prefix to a separate backend pool, and live reload config file.</p>
 
-<p><a href="/posts/1434380433653410969-why-go-is-beating-the-averages.html"><h2>Why Go is beating the averages</h2></a></p>
+<p>The mcrouter daemon itself is tiny, on cold boot consumes 11MB of RAM, high performance C++ project.</p>
 
-<p>In April 2001, rev. April 2003, Paul Graham wrote an article called <a href="http://www.paulgraham.com/avg.html" target="_blank">&ldquo;Beating the Averages&rdquo;</a></p>
+<p>For more information, visit <a target="_blank" href="//github.com/facebook/mcrouter/wiki">mcrouter wiki page</a>.</p>
 
-<p>This blog post is about how Go, following the rationale of that article, is the secret weapon that all startups should have.</p>
+<h2>Live reload config file</h2>
 
-<p><a href="/posts/1432264032306462173-tollbooth-http-rate-limiter-middleware-in-go.html"><h2>Tollbooth: An HTTP rate limiter middleware in Go</h2></a></p>
+<p>This one particular feature is ripe to have a complementary HTTP agent helper.</p>
 
-<p>Another great week leads to another OSS project. I am pleased to announce <a href="https://github.com/didip/tollbooth">Tollbooth: #golang HTTP rate limiter middleware</a>.</p>
+<p>Imagine the ability to live update hundreds of mcrouter, how cool is that?</p>
 
-<p>It allows you to limit access to each one of your request handlers.</p>
+<p>So today I am please to release <a target="_blank" href="//github.com/didip/mcrouter-hub" style="font-size: 20px; font-weight: bold">mcrouter-hub</a>, an HTTP companion to mcrouter. It allows you:</p>
 
-<p>For example, you may want to allow unlimited access to <code>/</code> but limit access to <code>POST /login</code> for as much as 10 requests per second per remote IP.</p>
+<ul>
+<li><p>In agent mode:</p>
 
-<p><a href="/posts/1430960969799974572-can-you-build-a-web-application-in-go.html"><h2>Can you build a web application in Go?</h2></a></p>
+<ul>
+<li><p>to expose the mcrouter config JSON via HTTP or HTTPS.</p></li>
 
-<p>Surely the answer is yes. Any yet, a surprising number of people asked me this question. Something must have prevented them from writing web project in Go.</p>
+<li><p>to modify the mcrouter config JSON. The POST method can be protected behind token-based security.</p></li>
 
-<p>So, I began the journey&hellip;</p>
+<li><p>to expose mcrouter stats gathered from both telnet interface and file.</p></li>
 
-<p><a href="/posts/1424762251437171629-back-to-blogging.html"><h2>Back to blogging again. This time in Go!</h2></a></p>
+<li><p>to export stats data to New Relic Insights.</p></li>
+</ul></li>
 
-<p>I&rsquo;ve always wanted to have more control over my own blog, reducing as much bells and whistles as possible, and focus on just the essence: The posts themselves.</p>
+<li><p>In central mode:</p>
 
-<p>All my friends know that I&rsquo;ve been enamored with <a href="https://golang.org/">Go</a> nowadays. This blog engine (static-site generator) is another perfect excuse to write even more Go.</p>
+<ul>
+<li><p>to receive config JSON from all agents via HTTP or HTTPS.</p></li>
 
-<p>For your reading pleasure, I&rsquo;ll share some of the blog&rsquo;s interesting parts you may find useful.</p>
+<li><p>to receive stats JSON from all agents.</p></li>
+
+<li><p>Both features can be protected behind token-based security as well.</p></li>
+</ul></li>
+</ul>
+
+<p>For more information, visit <a target="_blank" href="//github.com/didip/mcrouter-hub">mcrouter-hub README page</a>.</p>
+
+<h2>Getting started</h2>
+
+<p>Download the binary from <a target="_blank" href="//github.com/didip/mcrouter-hub/releases">this list</a> and run it.</p>
+
+<pre class="code"><code class="language-bash"># Agent mode
+# Prerequisites:
+#   * It must be run on the same box where mcrouter is running.
+#   * netcat command line tool must be installed.
+#
+# MCRHUB_CENTRAL_URLS is only useful if you want to have central daemons.
+# That setting is optional.
+MCROUTER_ADDR=localhost:5000 \
+MCROUTER_CONFIG_FILE=/path/to/mcrouter.json \
+MCRHUB_CENTRAL_URLS=http://localhost:5002 \
+/path/to/mcrouter-hub
+
+# Central mode
+MCRHUB_MODE=central /path/to/mcrouter-hub
+</code></pre>
+
+<p>For those of you who run considerable Memcache infrastructure, I heartily recommend mcrouter. It provides greater flexibility when provisioning extra capacity to your cluster.</p>
+
+<p>And when you do try mcrouter, feel free to try <a target="_blank" href="//github.com/didip/mcrouter-hub" style="font-size: 20px; font-weight: bold">mcrouter-hub</a> as well. See if you like it.</p>
 
             </section>
         </div>

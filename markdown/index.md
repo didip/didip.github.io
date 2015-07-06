@@ -1,3 +1,13 @@
+[<h2>mcrouter-hub: An HTTP companion to Facebook's mcrouter</h2>](/posts/1436200384288949394-mcrouter-hub-an-http-companion-to-facebook-mcrouter.html)
+
+
+Gophercon 2015 is right around the corner and that sets up the mood for another open source project.
+
+So, what is mcrouter? <a target="_blank" href="//code.facebook.com/posts/296442737213493/introducing-mcrouter-a-memcached-protocol-router-for-scaling-memcached-deployments/">Mcrouter</a> is a memcache router that helps Facebook scale their Memcache infrastructure to 5 billion requests per second.
+
+It has a dozen or so, read and write strategies for customized scaling experience: Replication, hot-cold warmup, shard by prefix to a separate backend pool, and live reload config file.
+
+
 [<h2>Why Go is beating the averages</h2>](/posts/1434380433653410969-why-go-is-beating-the-averages.html)
 
 
